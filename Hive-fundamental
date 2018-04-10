@@ -1,0 +1,4 @@
+Hive is data-ware Housing system built on top of hadoop.
+takes advantage or Hadoop distributed processing power
+facilitates easy data summarization, ad-hoc quries,analysis of large data-stored in Hadoop.
+HIve provides SQL(HQL) interface for data stored in Hadoop, which has Data Definition and Data Manipulation Language.
