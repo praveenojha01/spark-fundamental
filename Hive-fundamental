@@ -1,4 +1,34 @@
-Hive is data-ware Housing system built on top of hadoop.
-takes advantage or Hadoop distributed processing power
-facilitates easy data summarization, ad-hoc quries,analysis of large data-stored in Hadoop.
-HIve provides SQL(HQL) interface for data stored in Hadoop, which has Data Definition and Data Manipulation Language.
+Hive was initially developed by Facebook in 2007 to help the company handle massive amounts of new data. At the time Hive was created, 
+Facebook had a 15TB dataset they needed to work with. A few short years later, that data had grown to 700TB.  
+Their RDBMS data warehouse was taking too long to process daily jobs so the company decided to move their data into the scalable open-source Hadoop.  
+The company found that creating MapReduce programs was not easy and was time consuming for many users.  
+When they created Hive, their vision was to bring familiar database concepts to Hadoop, making it easier for all users to work with.  
+In 2008 Hive was open sourced. Facebook has since used Hive for reporting dashboards and ad-hoc analysis. 
+
+What is HIVE?
+
+ Hive is a data warehouse system built on top of Hadoop. Hive facilitates easy data summarization, ad-hoc queries,and the analysis of very large 
+datasets that are stored in Hadoop.  
+Hive provides a SQL interface, better known as HiveQL or HQL for short, which allows for easy querying of data in Hadoop. HQL has its ow
+n Data Definition and Data 
+Manipulation languages which are very similar to the DML and DDL many of us already have experience with.  
+In Hive, the HQL queries are implicitly translated into one or more MapReduce jobs, shielding the user from much more advanced and time
+consuming programming.  
+Hive provides a mechanism to project structure (like tables and partitions) onto the data in Hadoop and uses a metastore to map file structure to tabular form.  
+
+Hive is not a full database. However Hive can fit right alongside your RDBMS. There are a variety of things that Hive lacks when compared to an RDBMS.  
+
+Hive is not a real-time processing system and is best suited for batch jobs and huge datasets. 
+Think heavy analytics and large aggregations. Latencies are often much higher than in a traditional database system. 
+Hive is schema on read which provides for fast loads and flexibility, at the sacrifice of query time.  
+Hive lacks full SQL support and does not provide row level inserts, updates or deletes. 
+Hive does not support transactions and has limited subquery support. Query optimization is still a work in progress too. 
+
+Hive comes with a catalog known as the Metastore. The Metastore stores the system catalog and metadata about tables, columns, partitions and so on. 
+The metastore makes mapping file structure to a tabular form possible in Hive.
+
+A newer component of Hive is called HCatalog. HCatalog is built on top of the Hive metastore and incorporates Hive's DDL. HCatalog pro
+vides read and write interfaces for 
+Pig and MapReduce and uses Hive's command line interface for issuing data definition and metadata exploration commands. Essentially, 
+HCatalog makes it easier for users of Pig, MapReduce, and Hive, to read and write data on the grid
+
