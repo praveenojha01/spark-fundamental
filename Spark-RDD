@@ -1,0 +1,59 @@
+Scala - Working with RDD operations
+
+This was an RDD transformation, thus it returned a pointer to a RDD, which we have named as readme.
+this is my path and some data are inside.
+
+val readme = sc.textFile("/LabData/README.md")
+
+Let’s perform some RDD actions on this text file. Count the number of items in the RDD using this command:
+readme.count()
+
+Let’s run another action. Run this command to find the first item in the RDD:
+readme.first()
+
+Now let’s try a transformation. Use the filter transformation to return a new RDD with a subset of the items in the file. 
+Type in this command:
+val linesWithSpark = readme.filter(line => line.contains("Spark"))
+linesWithSpark.count()
+
+Again, this returned a pointer to a RDD with the results of the filter transformation.
+
+You can even chain together transformations and actions. To find out how many lines contains the word “Spark”, type in
+readme.filter(line => line.contains("Spark")).count()
+
+More on RDD Operations
+
+Spark has a MapReduce data flow pattern. We can use this to do a word count on the readme file
+Here we combined the flatMap, map, and the reduceByKey functions to do a word count of each word in the readme file.
+
+To collect the word counts, use the collect action.
+
+val wordCounts = readme.flatMap(line => line.split(" ")).
+                        map(word => (word, 1)).
+                        reduceByKey((a,b) => a + b)
+						
+To collect the word counts, use the collect action.						
+wordCounts.collect().foreach(println)
+
+val readme = sc.textFile("/resources/jupyter/labs/BD0211EN/LabData/README.md")
+readme.count()
+
+Below determine what is the most frequent CHARACTER in the README, and how many times was it used?
+val wordCounts = readme.flatMap(line => line.split(" ")).
+                        map(word => (word, 1)).
+                        reduceByKey(_+_)
+
+wordCounts.collect().foreach(println)
+
+Example:(package,1)
+(this,1)
+(Because,1)
+(Python,2)
+(cluster.,1)
+(its,1)
+([run,1)
+(general,2)
+
+
+
+
