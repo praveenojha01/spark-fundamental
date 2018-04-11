@@ -1,0 +1,93 @@
+
+Joining RDDs
+
+val readmeFile = sc.textFile("/resources//README.md")
+val pom = sc.textFile("/resources/pom.xml")
+
+How many Spark keywords are in each file?
+
+println(readmeFile.filter(line => line.contains("Spark")).count())
+println(pom.filter(line => line.contains("Spark")).count())
+
+Now do a WordCount on each RDD so that the results are (K,V) pairs of (word,count)
+
+val readmeCount = readmeFile.
+                    flatMap(line => line.split(" ")).
+                    map(word => (word, 1)).
+                    reduceByKey(_ + _)
+
+val pomCount = pom.
+                flatMap(line => line.split(" ")).
+                map(word => (word, 1)).
+                reduceByKey(_ + _)
+
+To see the array for either of them, just call the collect function on it.
+
+println("Readme Count\n")
+readmeCount.collect() foreach println
+Readme Count
+
+(package,1)
+(this,1)
+(Because,1)
+(Python,2)
+(cluster.,1)
+
+println("Pom Count\n")
+pomCount.collect() foreach println
+
+Pom Count
+(Unless,1)
+(this,3)
+(under,4)
+
+Now let's join these two RDDs together to get a collective set. 
+
+val joined = readmeCount.join(pomCount)
+joined.cache()
+
+Output:
+(file,(1,3))
+(are,(1,1))
+(Apache,(1,2))
+(is,(6,2))
+(uses,(1,1))
+
+val joinedSum = joined.map(k => (k._1, (k._2)._1 + (k._2)._2))
+joinedSum.collect() foreach println
+
+Let's combine the values together to get the total count
+
+(file,4)
+(are,2)
+(Apache,3)
+(is,8)
+(uses,2)
+
+
+To check if it is correct, print the first five elements from the joined and the joinedSum RDD
+
+
+println("Joined Individial\n")
+joined.take(5).foreach(println)
+
+println("\n\nJoined Sum\n")
+joinedSum.take(5).foreach(println)
+
+Joined Individial
+
+(file,(1,3))
+(are,(1,1))
+(Apache,(1,2))
+(is,(6,2))
+(uses,(1,1))
+
+
+Joined Sum
+
+(file,4)
+(are,2)
+(Apache,3)
+(is,8)
+(uses,2)
+
