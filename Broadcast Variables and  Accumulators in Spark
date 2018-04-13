@@ -1,0 +1,47 @@
+Broadcast variables allow the programmer to keep a read-only variable cached on each machine rather than shipping a copy of it with tasks. 
+They can be used, for example, to give every node a copy of a large input dataset in an efficient manner. 
+Spark also attempts to distribute broadcast variables using efficient broadcast algorithms to reduce communication cost.
+         
+Spark automatically broadcasts the common data needed by tasks within each stage.
+The data broadcasted this way is cached in serialized form and deserialized before running each task.
+This means that explicitly creating broadcast variables is only useful when tasks across multiple stages need the same data or when caching the data in deserialized form is important.
+
+Broadcast variables are created from a variable v by calling SparkContext.broadcast(v) 
+The broadcast variable is a wrapper around v
+and its value can be accessed by calling the "value" method.
+
+broadcast variables are:
+
+    Immutable
+    Distributed to the cluster
+    Fit in memory
+
+The code below shows this:
+
+scala> val broadcastVar = sc.broadcast(Array(1, 2, 3))
+broadcastVar: org.apache.spark.broadcast.Broadcast[Array[Int]] = Broadcast(0)
+
+scala> broadcastVar.value
+res0: Array[Int] = Array(1, 2, 3)
+
+=================================================================================================
+
+Accumulators:
+
+An accumulator is also a variable that is broadcasted to the worker nodes. 
+The key difference between a broadcast variable and an accumulator is that while the broadcast variable is read-only, the accumulator can be added to.
+
+scala> val accum = sc.longAccumulator("My Accumulator")
+accum: org.apache.spark.util.LongAccumulator = LongAccumulator(id: 0, name: Some(My Accumulator), value: 0)
+
+scala> sc.parallelize(Array(1, 2, 3, 4)).foreach(x => accum.add(x))
+
+scala> accum.value
+res2: Long = 10
+
+When should use accumulators
+
+  Counters or sums that can be reliably used in parallel processing
+  Native support for numeric types, extensions possible via AP
+  Workers can modify state, but cannot read content
+  Only a driver program can read the accumulated value
