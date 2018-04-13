@@ -1,17 +1,46 @@
 spark-fundamental
-This is spark fundamental Apache Spark is a data-processing Frame Work which is fast and it has an advanced execution Engine supporting cyclic data flow and in-memory computing. Spark can run on Hadoop, standalone or in the cloud and is capable of accessing diverse data sources including HDFS, HBase, Cassandra etc.
+Apache Spark is a powerful, multi-purpose execution engine for big data application with high performance. 
+•	Apache Spark is an open-source cluster-computing framework
+                            	or 
+•	Apache Spark is a fast, in-memory data processing engine with development APIs.
+===>Spark development APIs to allow data workers to efficiently execute streaming,
+    machine learning or SQL workloads that require fast iterative access to datasets.
+    
+•	Apache Spark can process data from a variety of data repositories, including the Hadoop Distributed File System (HDFS), NoSQL databases and relational data stores such as Apache Hive. 
+•	Spark supports in-memory processing to boost the performance of big data analytics applications, but it can also do conventional disk-based processing when data sets are too large to fit into the available system memory.
+•	Spark provides programmers with a potentially faster and more flexible alternative to MapReduce.
+•	Spark's developers say iWhat Sets Spark Apart?
 
-Apache Spark RDD RDD stands Resilient Distributed Dataset. RDDs are the fundamental abstraction of Apache Spark. It is an immutable distributed collection of the dataset. Each dataset in RDD is divided into logical partitions. On the different node of the cluster, we can compute These partitions. RDDs are a read-only partitioned collection of record. we can create RDD in three ways: • Parallelizing already existing collection in driver program. • Referencing a dataset in an external storage system (e.g. HDFS, Hbase, shared file system). • Creating RDD from already existing RDDs
+There are many reasons to choose Spark:
+
+•	Simplicity: 
+    Spark’s capabilities are accessible via a set of rich APIs, 
+    all designed specifically for interacting quickly and easily with data at scale. 
+    These APIs are well documented and structured in a way that makes it straightforward for data scientists and application developers to quickly put Spark to work.
+
+•	Speed:
+    Spark is designed for speed, operating both in memory and on disk. 
+    
+•	Support: Spark supports a range of programming languages, including Java, Python, R, and Scala. Although often closely associated with HDFS, Spark includes native support for tight integration with a number of leading storage solutions in the Hadoop ecosystem and beyond. Furthermore, the Apache Spark community is large, active, and international. A growing set of commercial providers including Databricks, IBM, and all of the main Hadoop vendors deliver comprehensive support for Spark-based solutions.
+    t can run jobs 100 times faster than MapReduce when processed in memory and 10 times faster on disk.
+
 
 Sparkling Features of Spark RDD
 
-There are several advantages of using RDD. Some of them are-
+There are several advantages of using RDD. Some of them are ======>>>
 
-    In-memory computation The data inside RDD are stored in memory for as long as you want to store. Keeping the data in-memory improves the performance by an order of magnitudes. refer this comprehensive guide to Learn Spark in-memory computation in detail.
-    Lazy Evaluation The data inside RDDs are not evaluated on the go. The changes or the computation is performed only after an action is triggered. Thus, it limits how much work it has to do. Follow this guide to learn Spark lazy evaluation in great detail.
-    Fault Tolerance Upon the failure of worker node, using lineage of operations we can re-compute the lost partition of RDD from the original one. Thus, we can easily recover the lost data. Learn Fault tolerance is Spark in detail. 4 Immutability RDDS are immutable in nature meaning once we create an RDD we can not manipulate it. And if we perform any transformation, it creates new RDD. We achieve consistency through immutability.
-    Persistence We can store the frequently used RDD in in-memory and we can also retrieve them directly from memory without going to disk, this speedup the execution. We can perform Multiple operations on the same data, this happens by storing the data explicitly in memory by calling persist() or cache() function. Follow this guide for the detailed study of RDD persistence in Spark.
-    Partitioning RDD partition the records logically and distributes the data across various nodes in the cluster. The logical divisions are only for processing and internally it has no division. Thus, it provides parallelism.
-    Parallel Rdd, process the data parallelly over the cluster.
-    Location-Stickiness RDDs are capable of defining placement preference to compute partitions. Placement preference refers to information about the location of RDD. The DAGScheduler places the partitions in such a way that task is close to data as much as possible. Thus speed up computation. Follow this guide to learn What is DAG?
-    Coarse-grained Operation We apply coarse-grained transformations to RDD. Coarse-grained meaning the operation applies to the whole dataset not on an individual element in the data set of RDD.
+    •In-memory computation The data inside RDD are stored in memory for as long as you want to store. Keeping the data in-memory improves the performance by an order of magnitudes. refer this comprehensive guide to Learn Spark in-memory computation in detail.
+    
+    •Lazy Evaluation The data inside RDDs are not evaluated on the go. The changes or the computation is performed only after an action is triggered. Thus, it limits how much work it has to do. Follow this guide to learn Spark lazy evaluation in great detail.
+    
+    •Fault Tolerance Upon the failure of worker node, using lineage of operations we can re-compute the lost partition of RDD from the original one. Thus, we can easily recover the lost data. 
+    
+    •Immutability RDDS are immutable in nature meaning once we create an RDD we can not manipulate it,And if we perform any transformation, it creates new RDD.
+    We achieve consistency through immutability.
+    
+    •Persistence We can store the frequently used RDD in in-memory and we can also retrieve them directly from memory without going to disk, this speedup the execution. 
+    We can perform Multiple operations on the same data, this happens by storing the data explicitly in memory by calling persist() or cache() function. 
+    Follow this guide for the detailed study of RDD persistence in Spark.
+    
+    •Partitioning RDD partition the records logically and distributes the data across various nodes in the cluster. The logical divisions are only for processing and internally it has no division. Thus, it provides parallelism.
+    
